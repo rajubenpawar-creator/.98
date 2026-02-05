@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Meme Maker Online – Free Tool</title>
+<meta name="description" content="Create memes online with custom text.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="background"></div>
+
+<header class="header">
+<h1>Meme Maker</h1>
+</header>
+
+<main class="tools-section tool-card">
+<input type="file" id="img">
+<input type="text" id="text" placeholder="Enter meme text">
+<button onclick="makeMeme()">Create Meme</button>
+<canvas id="canvas"></canvas>
+</main>
+
+<script>
+function makeMeme(){
+  const imgFile=document.getElementById("img").files[0];
+  const text=document.getElementById("text").value;
+  if(!imgFile)return alert("Select image");
+
+  const img=new Image();
+  const r=new FileReader();
+  r.onload=e=>img.src=e.target.result;
+  img.onload=()=>{
+    const c=document.getElementById("canvas");
+    c.width=img.width;
+    c.height=img.height;
+    const ctx=c.getContext("2d");
+    ctx.drawImage(img,0,0);
+    ctx.font="40px Impact";
+    ctx.fillStyle="white";
+    ctx.strokeStyle="black";
+    ctx.fillText(text,20,50);
+    ctx.strokeText(text,20,50);
+  }
+  r.readAsDataURL(imgFile);
+}
+</script>
+
+</body>
+</html>
+
