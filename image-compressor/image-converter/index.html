@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Converter Online – JPG PNG WebP</title>
+<meta name="description" content="Convert images online between JPG, PNG, WebP formats.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="background"></div>
+
+<header class="header">
+<h1>Image Converter</h1>
+</header>
+
+<main class="tools-section tool-card">
+<input type="file" id="img">
+<select id="format">
+<option value="image/png">PNG</option>
+<option value="image/jpeg">JPG</option>
+<option value="image/webp">WebP</option>
+</select>
+<button onclick="convert()">Convert</button>
+<a id="download" style="display:none;"></a>
+</main>
+
+<script>
+function convert() {
+  const imgFile = document.getElementById("img").files[0];
+  const format = document.getElementById("format").value;
+  const link = document.getElementById("download");
+
+  if (!imgFile) return alert("Select image");
+
+  const img = new Image();
+  const reader = new FileReader();
+
+  reader.onload = e => img.src = e.target.result;
+  img.onload = () => {
+    const c = document.createElement("canvas");
+    c.width = img.width;
+    c.height = img.height;
+    c.getContext("2d").drawImage(img,0,0);
+    c.toBlob(b=>{
+      link.href = URL.createObjectURL(b);
+      link.download = "converted";
+      link.innerText = "Download";
+      link.style.display="block";
+    },format);
+  };
+
+  reader.readAsDataURL(imgFile);
+}
+</script>
+
+</body>
+</html>
