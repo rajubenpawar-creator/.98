@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Compressor Online – Free AI Tool</title>
+<meta name="description" content="Compress images online without losing quality. Free image compressor.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="background"></div>
+
+<header class="header">
+<h1>Image Compressor</h1>
+<p>Reduce image size online</p>
+</header>
+
+<main class="tools-section tool-card">
+<input type="file" id="img">
+<input type="range" id="quality" min="10" max="90" value="60">
+<button onclick="compressImage('img','quality','download')">Compress</button>
+<a id="download" style="display:none;"></a>
+</main>
+
+<script src="../script.js"></script>
+</body>
+</html>
